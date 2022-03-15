@@ -11,4 +11,8 @@ export class UsersService {
   create(name: string, email: string, password: string): Promise<User> {
     return this.userRepo.create(name, email, password);
   }
+
+  search(name: string): Promise<User> {
+    return this.userRepo.search(name);
+  }
 }

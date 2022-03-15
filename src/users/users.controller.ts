@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from '../domain/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { SearchUserDto } from './dto/search-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -24,5 +25,10 @@ export class UsersController {
       createUserDto.email,
       createUserDto.password,
     );
+  }
+
+  @Get('/search/:name')
+  search(@Param('name') name: string): Promise<SearchUserDto> {
+    return this.usersService.search(name);
   }
 }
