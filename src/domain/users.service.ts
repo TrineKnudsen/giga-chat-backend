@@ -15,4 +15,8 @@ export class UsersService {
   search(name: string): Promise<User> {
     return this.userRepo.search(name);
   }
+
+  login(email: string, password: string) {
+    return this.userRepo.login(email, password);
+  }
 }
