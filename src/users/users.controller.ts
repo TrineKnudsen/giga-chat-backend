@@ -11,6 +11,8 @@ import {
 import { UsersService } from '../domain/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SearchUserDto } from './dto/search-user.dto';
+import { User } from '../core/user.entity';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -25,6 +27,11 @@ export class UsersController {
       createUserDto.email,
       createUserDto.password,
     );
+  }
+
+  @Post('/login')
+  login(@Body() loginUserDto: LoginUserDto): Promise<User> {
+    return this.usersService.login(loginUserDto.email, loginUserDto.password);
   }
 
   @Get('/search/:name')
