@@ -9,7 +9,7 @@ export class RoomsController {
   ) {}
 
   @Post()
-  create(@Body() createRoomDto: CreateRoomDto) {
-    return this.roomsService.create(createRoomDto.name);
+  create(@Body() createRoomDto: CreateRoomDto, ownerUuid: string) {
+    return this.roomsService.create(createRoomDto.name, ownerUuid);
   }
 }

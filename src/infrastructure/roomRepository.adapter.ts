@@ -10,7 +10,7 @@ export class RoomRepositoryAdapter implements IRoomRepository {
   constructor(private readonly em: EntityManager) {
     this.roomRepo = em.getRepository(RoomsSchema);
   }
-  create(name: string): Promise<Room> {
-    return this.roomRepo.save({ name: name });
+  create(name: string, ownerUuid: string): Promise<Room> {
+    return this.roomRepo.save({ name: name, ownerUuid: ownerUuid });
   }
 }

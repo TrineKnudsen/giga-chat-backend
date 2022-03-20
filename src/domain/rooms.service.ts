@@ -8,7 +8,7 @@ export class RoomsService {
     this.roomRepo = roomRepository;
   }
 
-  create(name: string): Promise<Room> {
-    return this.roomRepo.create(name);
+  create(name: string, ownerUuid: string): Promise<Room> {
+    return this.roomRepo.create(name, ownerUuid);
   }
 }
