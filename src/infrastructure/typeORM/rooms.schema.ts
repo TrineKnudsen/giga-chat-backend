@@ -5,7 +5,7 @@ export const RoomsSchema = new EntitySchema<Room>({
   name: 'Room',
   target: Room,
   columns: {
-    uid: {
+    uuid: {
       type: 'uuid',
       generated: 'uuid',
       primary: true,
@@ -14,4 +14,5 @@ export const RoomsSchema = new EntitySchema<Room>({
       type: 'varchar',
     },
   },
+  relations: {},
 });

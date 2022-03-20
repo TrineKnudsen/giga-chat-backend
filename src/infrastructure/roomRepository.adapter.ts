@@ -1,0 +1,16 @@
+import { Injectable } from '@nestjs/common';
+import { IRoomRepository } from '../domain/borders/roomRepository.interface';
+import { Room } from '../core/room.entity';
+import { EntityManager, Repository } from 'typeorm';
+import { RoomsSchema } from './typeORM/rooms.schema';
+
+@Injectable()
+export class RoomRepositoryAdapter implements IRoomRepository {
+  private readonly roomRepo: Repository<Room>;
+  constructor(private readonly em: EntityManager) {
+    this.roomRepo = em.getRepository(RoomsSchema);
+  }
+  create(name: string): Promise<Room> {
+    return this.roomRepo.save({ name: name });
+  }
+}

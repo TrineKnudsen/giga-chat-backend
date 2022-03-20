@@ -1,4 +1,4 @@
 export class Room {
-  uid: string;
+  uuid: string;
   name: string;
 }

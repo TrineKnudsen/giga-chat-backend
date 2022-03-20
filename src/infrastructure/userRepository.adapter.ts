@@ -1,7 +1,7 @@
-import { IUserRepository } from '../../domain/borders/userRepository.interface';
-import { User } from '../../core/user.entity';
+import { IUserRepository } from '../domain/borders/userRepository.interface';
+import { User } from '../core/user.entity';
 import { EntityManager, Repository } from 'typeorm';
-import { UserSchema } from './user.schema';
+import { UserSchema } from './typeORM/user.schema';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
