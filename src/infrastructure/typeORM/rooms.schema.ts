@@ -13,6 +13,9 @@ export const RoomsSchema = new EntitySchema<Room>({
     name: {
       type: 'varchar',
     },
+    ownerUuid: {
+      type: 'varchar',
+    },
   },
   relations: {},
 });

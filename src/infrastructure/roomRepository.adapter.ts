@@ -13,4 +13,12 @@ export class RoomRepositoryAdapter implements IRoomRepository {
   create(name: string, ownerUuid: string): Promise<Room> {
     return this.roomRepo.save({ name: name, ownerUuid: ownerUuid });
   }
+
+  getMyRooms(myUuid: string): Promise<Room[]> {
+    return this.roomRepo.find({
+      where: {
+        ownerUuid: myUuid,
+      },
+    });
+  }
 }

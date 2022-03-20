@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { RoomsService } from '../domain/rooms.service';
+import { RoomDto } from './dto/room.dto';
 
 @Controller('rooms')
 export class RoomsController {
@@ -9,7 +10,15 @@ export class RoomsController {
   ) {}
 
   @Post()
-  create(@Body() createRoomDto: CreateRoomDto, ownerUuid: string) {
-    return this.roomsService.create(createRoomDto.name, ownerUuid);
+  create(@Body() createRoomDto: CreateRoomDto) {
+    return this.roomsService.create(
+      createRoomDto.name,
+      createRoomDto.ownerUuid,
+    );
+  }
+
+  @Get('/:ownerUuid')
+  getMyRooms(@Param('ownerUuid') ownerUuid: string): Promise<RoomDto[]> {
+    return this.roomsService.findMyRooms(ownerUuid);
   }
 }

@@ -11,4 +11,8 @@ export class RoomsService {
   create(name: string, ownerUuid: string): Promise<Room> {
     return this.roomRepo.create(name, ownerUuid);
   }
+
+  findMyRooms(ownerUuid: string): Promise<Room[]> {
+    return this.roomRepo.getMyRooms(ownerUuid);
+  }
 }
