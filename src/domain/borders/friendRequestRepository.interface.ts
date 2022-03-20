@@ -2,8 +2,10 @@ import { FriendRequest } from '../../core/friendRequest.entity';
 
 export interface IFriendRequestRepository {
   create(
-    myUserUuid: string,
-    friendUserUuid: string,
+    senderUserName: string,
+    receiverUserUuid: string,
     isAccepted: boolean,
   ): Promise<FriendRequest>;
+
+  get(receiverUserUuid: string): Promise<FriendRequest[]>;
 }

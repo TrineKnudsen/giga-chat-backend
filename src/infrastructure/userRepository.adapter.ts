@@ -28,4 +28,33 @@ export class UserRepositoryAdapter implements IUserRepository {
       },
     });
   }
+
+  getUserById(uuid: string): Promise<User> {
+    return this.userRepo.findOne({
+      where: {
+        uuid: uuid,
+      },
+    });
+  }
+
+  async addFriend(myUserUuid: string, friendUserName: string) {
+    const user = await this.getUserById(myUserUuid);
+    const friendAdded = this.userRepo.findOne({
+      where: {
+        name: friendUserName,
+      },
+    });
+
+    const currentUser = this.userRepo.findOne({
+      where: {
+        uuid: myUserUuid,
+      },
+    });
+    await this.userRepo.save({
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      friends: user.friends + ', ' + friendUserName,
+    });
+  }
 }

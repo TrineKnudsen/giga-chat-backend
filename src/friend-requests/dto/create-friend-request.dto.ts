@@ -2,9 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateFriendRequestDto {
   @ApiProperty()
-  myUserUuid: string;
+  senderUserName: string;
   @ApiProperty()
-  friendUserUuid: string;
+  receiverUserUuid: string;
   @ApiProperty()
   isAccepted: boolean;
 }

@@ -8,14 +8,18 @@ export class FriendRequestsService {
     this.friendRequestRepo = friendRequestRepository;
   }
   create(
-    myUserUuid: string,
-    friendUserUuid: string,
+    senderUserName: string,
+    receiverUserUuid: string,
     isAccepted: boolean,
   ): Promise<FriendRequest> {
     return this.friendRequestRepo.create(
-      myUserUuid,
-      friendUserUuid,
+      senderUserName,
+      receiverUserUuid,
       isAccepted,
     );
+  }
+
+  get(receiverUserUuid: string): Promise<FriendRequest[]> {
+    return this.friendRequestRepo.get(receiverUserUuid);
   }
 }

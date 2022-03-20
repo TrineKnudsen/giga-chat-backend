@@ -10,10 +10,10 @@ export const FriendRequestSchema = new EntitySchema<FriendRequest>({
       generated: 'uuid',
       primary: true,
     },
-    myUserUuid: {
+    senderUserName: {
       type: 'varchar',
     },
-    friendUserUuid: {
+    receiverUserUuid: {
       type: 'varchar',
     },
     isAccepted: {

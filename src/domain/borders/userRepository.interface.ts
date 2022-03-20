@@ -6,4 +6,6 @@ export interface IUserRepository {
   search(name: string): Promise<User>;
 
   login(email: string, password: string): Promise<User>;
+
+  addFriend(myUserUuid: string, friendUserName: string);
 }

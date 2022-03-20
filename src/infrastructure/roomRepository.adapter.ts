@@ -15,6 +15,13 @@ export class RoomRepositoryAdapter implements IRoomRepository {
   }
 
   getMyRooms(myUuid: string): Promise<Room[]> {
+    //let rooms: Room[];
+    //const myRooms = this.roomRepo.find({
+    //where: {
+    //ownerUuid: myUuid,
+    //},
+    //});
+
     return this.roomRepo.find({
       where: {
         ownerUuid: myUuid,

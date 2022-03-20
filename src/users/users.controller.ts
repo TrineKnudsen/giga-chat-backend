@@ -38,4 +38,9 @@ export class UsersController {
   search(@Param('name') name: string): Promise<SearchUserDto> {
     return this.usersService.search(name);
   }
+
+  @Post('/accFriend')
+  accFriend(myUserUuid: string, friendUserName: string) {
+    this.usersService.accFriend(myUserUuid, friendUserName);
+  }
 }

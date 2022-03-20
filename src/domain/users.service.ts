@@ -19,4 +19,8 @@ export class UsersService {
   login(email: string, password: string) {
     return this.userRepo.login(email, password);
   }
+
+  accFriend(myUserUuid: string, friendUserName: string) {
+    this.userRepo.addFriend(myUserUuid, friendUserName);
+  }
 }
