@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { ProfilesService } from './profiles.service';
 import { ProfilesController } from './profiles.controller';
 import { MongodbModule } from '../infrastructure/mongo/mongodb.module';
 import { ProfileProvider } from '../infrastructure/mongo/profile.provider';
+import { ProfilesGateway } from './profiles.gateway';
 
 @Module({
-  imports: [MongodbModule],
+  imports: [MongodbModule, CacheModule.register()],
   controllers: [ProfilesController],
-  providers: [ProfilesService, ...ProfileProvider],
+  providers: [ProfilesGateway, ProfilesService, ...ProfileProvider],
 })
 export class ProfilesModule {}
