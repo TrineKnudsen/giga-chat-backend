@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChatsModule } from './chats/chats.module';
 import { FriendRequestsModule } from './friend-requests/friend-requests.module';
 import { RoomsModule } from './rooms/rooms.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { RoomsModule } from './rooms/rooms.module';
     ChatsModule,
     FriendRequestsModule,
     RoomsModule,
+    ProfilesModule,
   ],
   controllers: [],
   providers: [],
