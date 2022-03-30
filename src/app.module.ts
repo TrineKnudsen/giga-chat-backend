@@ -5,6 +5,7 @@ import { ChatsModule } from './chats/chats.module';
 import { FriendRequestsModule } from './friend-requests/friend-requests.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { ProfilesModule } from './profiles/profiles.module';
+import { MatchesModule } from './matches/matches.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProfilesModule } from './profiles/profiles.module';
     FriendRequestsModule,
     RoomsModule,
     ProfilesModule,
+    MatchesModule,
   ],
   controllers: [],
   providers: [],
