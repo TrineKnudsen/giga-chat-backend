@@ -2,10 +2,15 @@ import {
   WebSocketGateway,
   SubscribeMessage,
   MessageBody,
+  WebSocketServer,
 } from '@nestjs/websockets';
 import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
+import { CACHE_MANAGER, Inject } from '@nestjs/common';
+import { Cache } from 'cache-manager';
+import { Match } from './entities/match.entity';
+import { Server } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
@@ -13,11 +18,34 @@ import { UpdateMatchDto } from './dto/update-match.dto';
   },
 })
 export class MatchesGateway {
-  constructor(private readonly matchesService: MatchesService) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly matchesService: MatchesService,
+  ) {}
+
+  @WebSocketServer()
+  server: Server;
 
   @SubscribeMessage('createMatch')
   create(@MessageBody() createMatchDto: CreateMatchDto) {
-    return this.matchesService.create(createMatchDto);
+    return this.matchesService.create(createMatchDto).then((value) => {
+      this.cacheManager.set<Match>(value.userUUID, value, {
+        ttl: 600,
+      });
+      this.cacheManager
+        .get<Match>(createMatchDto.userMatchReceiverUUID)
+        .then((otherMatch) => {
+          if (otherMatch.likes.includes(createMatchDto.userMatchSenderUUID)) {
+            this.server.emit(
+              'haveMatch',
+              createMatchDto.userMatchReceiverUUID +
+                ' and ' +
+                createMatchDto.userMatchSenderUUID +
+                ' has matched',
+            );
+          }
+        });
+    });
   }
 
   @SubscribeMessage('findAllMatches')
